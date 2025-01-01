@@ -75,7 +75,7 @@ window.addEventListener("keydown", function(event)
         lav.viteza_x += speed_on_user_input
     if(event.key == "w" || event.keyCode == 32)
         lav.jump()
-})
+},)
 
 window.addEventListener("keyup", function(event)
 {
@@ -83,4 +83,61 @@ window.addEventListener("keyup", function(event)
         lav.viteza_x += speed_on_user_input
     if(event.key == "d")
         lav.viteza_y -= speed_on_user_input
+})
+
+
+/// This part of code is for the phone users. Hope this shit works or i'm gonna pull my eyeballs out
+
+const treshold = 50
+var dist_x, dist_y
+var start_x, start_y
+
+const maxMovement_tap = 10,
+maxDuration_tap = 200; // in miliseconds
+var tap_startTime;
+
+window.addEventListener("touchstart", function(event)
+{
+    const touch = event.touches[0];
+    start_x = touch.clientX;
+    start_y = touch.clientY;
+
+    tap_startTime = Date.now();
+})
+
+window.addEventListener("touchend", function(event){
+    dist_x = event.changedTouches[0].clientX - start_x;
+    dist_y = event.changedTouches[0].clientY - start_y;
+    const duration_tap = tap_startTime - Date.now();
+
+    /// first, check if it's just a tap
+    if(Math.abs(dist_x) < maxMovement_tap && Math.abs(dist_y) < maxMovement_tap
+    && duration_tap < maxDuration_tap)
+    {
+        lav.jump();
+    } 
+    else
+    {
+        if(Math.abs(dist_x) > Math.abs(dist_y))
+        {
+            /// slide on the Ox axis
+            if(dist_x > treshold)
+            {
+                // slide right
+                lav.viteza_x += speed_on_user_input;
+            }
+            else
+            if(dist_x < -treshold)
+            {
+                // slide left
+                lav.viteza_x -= speed_on_user_input;
+            }
+        }
+        else
+        {
+            /// slide on the Oy axis
+            if(dist_y < -treshold)
+                lav.jump();
+        }
+    } 
 })
