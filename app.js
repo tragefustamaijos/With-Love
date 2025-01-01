@@ -61,7 +61,7 @@ function animate()
     
     c.fillStyle = "Crimson"
     c.font = "italic 30px TimesNewRoman"
-    c.fillText("Te vad, Alexia <3",width/2 - c.measureText("Te vad, Alexia <3").width/2, 30)
+    c.fillText("Zana Panseluta <3",width/2 - c.measureText("Zana Panseluta <3").width/2, 30)
 
     lav.update()
 }
