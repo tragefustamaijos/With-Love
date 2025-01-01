@@ -8,8 +8,8 @@ const height = innerHeight
 
 const gravitatie = 2;
 const frecare = 0.9
-const JUMP_VELOCITY = 80
-const speed_on_user_input = 4
+const JUMP_VELOCITY = 45
+const speed_on_user_input = 2
 
 function Lavinia()
 {
@@ -17,14 +17,14 @@ function Lavinia()
     this.image.src = "Zana Original.jpg";
     this.x = 70
     this.y = 300
-    this.width = 384
-    this.height = 512
+    this.width = 150
+    this.height = 200
 
     this.viteza_x = 0;
-    this.viteza_y = 0
+    this.viteza_y = 1
     this.draw = function()
     {
-        c.drawImage(this.image, this.x, this.y)
+        c.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
 
     this.update = function()
@@ -37,7 +37,10 @@ function Lavinia()
         if(this.y + this.height > innerHeight && this.viteza_y > 0)
             this.viteza_y = -this.viteza_y * frecare
         else
-            this.viteza_y += gravitatie
+            if(this.y < innerHeight - this.height + 20)
+                this.viteza_y += gravitatie
+            else
+            this.viteza_y = 0
         this.y += this.viteza_y
         this.draw();
     }
@@ -55,8 +58,12 @@ function animate()
 {
     requestAnimationFrame(animate)
     c.clearRect(0, 0, innerWidth, innerHeight)
+    
+    c.fillStyle = "Crimson"
+    c.font = "italic 30px TimesNewRoman"
+    c.fillText("Zana Panseluta <3",width/2 - c.measureText("Zana Panseluta <3").width/2, 30)
+
     lav.update()
-    c.fillText("Zana Panseluta <3", 200, 30)
 }
 animate()
 
@@ -77,4 +84,3 @@ window.addEventListener("keyup", function(event)
     if(event.key == "d")
         lav.viteza_y -= speed_on_user_input
 })
-
