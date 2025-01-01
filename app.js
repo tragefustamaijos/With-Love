@@ -141,3 +141,7 @@ window.addEventListener("touchend", function(event){
         }
     } 
 })
+
+window.addEventListener("resize", function(){
+    location.reload();
+})
