@@ -77,14 +77,6 @@ window.addEventListener("keydown", function(event)
         lav.jump()
 },)
 
-window.addEventListener("keyup", function(event)
-{
-    if(event.key == "a")
-        lav.viteza_x += speed_on_user_input
-    if(event.key == "d")
-        lav.viteza_y -= speed_on_user_input
-})
-
 
 /// This part of code is for the phone users. Hope this shit works or i'm gonna pull my eyeballs out
 
